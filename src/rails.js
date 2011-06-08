@@ -172,8 +172,11 @@
   });
 
   document.on("click", "form input[type=submit], form button[type=submit], form button:not([type])", function(event, button) {
+    var form = event.findElement('form');
     // register the pressed submit button
-    event.findElement('form').store('rails:submit-button', button.name || false);
+    form.store('rails:submit-button', button.name || false);
+    // allowAction() checks the form element in on submit event
+    form.writeAttribute('data-confirm', button.readAttribute('data-confirm'));
   });
 
   document.on("submit", function(event) {
