@@ -144,7 +144,7 @@
       input.setValue(input.readAttribute('data-disable-with')).disable();
     });
   }
-  
+
   function enableFormElements(form) {
     form.select('input[type=submit][data-disable-with]').each(function(input) {
       input.setValue(input.retrieve('rails:original-value')).enable();
@@ -188,14 +188,14 @@
       handleRemote(form);
       event.stop();
     } else {
-      disableFormElements(form);
+      setTimeout(function() { disableFormElements(form); }, 13);
     }
   });
 
   document.on('ajax:create', 'form', function(event, form) {
     if (form == event.findElement()) disableFormElements(form);
   });
-  
+
   document.on('ajax:complete', 'form', function(event, form) {
     if (form == event.findElement()) enableFormElements(form);
   });
